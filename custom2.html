@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic City Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>City Information</h1>
+    <div id="content">
+        <p>Please select a country and city.</p>
+    </div>
+
+    <script>
+        // Przykładowe dane
+        const data = {
+            "USA_New York": "<h1>Welcome to New York</h1><p>New York, also known as the Big Apple, is a <strong>vibrant city</strong> in the USA.</p>",
+            "USA_Los Angeles": "<h1>Welcome to Los Angeles</h1><p>Los Angeles is famous for <strong>Hollywood</strong> and sunny beaches.</p>",
+            "Canada_Toronto": "<h1>Welcome to Toronto</h1><p>Toronto is the largest city in Canada, known for the <strong>CN Tower</strong>.</p>",
+            "Canada_Vancouver": "<h1>Welcome to Vancouver</h1><p>Vancouver is a <strong>beautiful coastal city</strong> surrounded by mountains.</p>",
+            "UK_London": "<h1>Welcome to London</h1><p>London is the capital of the UK, known for <strong>Big Ben</strong> and the Thames.</p>"
+        };
+
+        // Pobieranie parametrów z URL
+        const params = new URLSearchParams(window.location.search);
+        const country = params.get('country');
+        const city = params.get('city');
+
+        // Generowanie klucza
+        const key = `${country}_${city}`;
+        const content = data[key] || "<p>No data available for the selected country and city.</p>";
+
+        // Wstawianie treści na stronę
+        document.getElementById('content').innerHTML = content;
+    </script>
+</body>
+</html>
