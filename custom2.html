@@ -7,43 +7,52 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.5;
             margin: 20px;
+            line-height: 1.6;
         }
-        h1 {
-            color: #333;
-        }
-        p {
-            margin: 10px 0;
+        .content {
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
     <h1>City Information</h1>
-    <div id="content">
+    <div id="content" class="content">
         <p>Please select a country and city.</p>
     </div>
 
     <script>
-        // Przykładowe dane
+        // Dynamic data
         const data = {
-            "USA_New York": "<h1>Welcome to New York</h1><p>New York, also known as the Big Apple, is a <strong>vibrant city</strong> in the USA.</p>",
-            "USA_Los Angeles": "<h1>Welcome to Los Angeles</h1><p>Los Angeles is famous for <strong>Hollywood</strong> and sunny beaches.</p>",
-            "Canada_Toronto": "<h1>Welcome to Toronto</h1><p>Toronto is the largest city in Canada, known for the <strong>CN Tower</strong>.</p>",
-            "Canada_Vancouver": "<h1>Welcome to Vancouver</h1><p>Vancouver is a <strong>beautiful coastal city</strong> surrounded by mountains.</p>",
-            "UK_London": "<h1>Welcome to London</h1><p>London is the capital of the UK, known for <strong>Big Ben</strong> and the Thames.</p>"
+            "USA_New York": `<h1 style="color:blue; font-family:Arial;">Welcome to New York</h1><p style="font-style:italic;">The <strong>Big Apple</strong>, known for its skyscrapers.</p>`,
+            "USA_Los Angeles": `<h1 style="color:darkorange; font-family:Verdana;">Welcome to Los Angeles</h1><p>Famous for <strong>Hollywood</strong> and its sunny beaches.</p>`,
+            "Canada_Toronto": `<h1 style="color:red; font-family:Tahoma;">Welcome to Toronto</h1><p>Visit the iconic <u>CN Tower</u> in Canada's largest city.</p>`,
+            "Canada_Vancouver": `<h1 style="color:green; font-family:Georgia;">Welcome to Vancouver</h1><p>Surrounded by <strong>mountains</strong>, a <em>beautiful coastal city</em>.</p>`,
+            "UK_London": `<h1 style="color:purple; font-family:'Times New Roman';">Welcome to London</h1><p>Explore <strong>Big Ben</strong> and ride on the <u>London Eye</u>.</p>`,
+            "France_Paris": `<h1 style="color:pink; font-family:'Comic Sans MS';">Bienvenue à Paris</h1><p>Known as the <em>City of Love</em>, don't miss the <strong>Eiffel Tower</strong>.</p>`,
+            "Germany_Berlin": `<h1 style="color:gray; font-family:Helvetica;">Willkommen in Berlin</h1><p>Discover the <u>Brandenburg Gate</u> and experience the vibrant culture.</p>`,
+            "Japan_Tokyo": `<h1 style="color:darkred; font-family:Courier;">ようこそ東京へ (Welcome to Tokyo)</h1><p>Enjoy the <strong>vivid neon lights</strong> and delicious sushi.</p>`,
+            "Japan_Kyoto": `<h1 style="color:darkblue; font-family:Arial;">Welcome to Kyoto</h1><p>Explore the <strong>ancient temples</strong> and beautiful <u>zen gardens</u>.</p>`,
+            "Italy_Rome": `<h1 style="color:goldenrod; font-family:Georgia;">Benvenuto a Roma</h1><p>Home of the <strong>Colosseum</strong> and <em>ancient ruins</em>.</p>`,
+            "Spain_Barcelona": `<h1 style="color:teal; font-family:Verdana;">Bienvenido a Barcelona</h1><p>Experience the unique architecture of <strong>Gaudí</strong> and the lively culture.</p>`,
+            "Australia_Sydney": `<h1 style="color:blueviolet; font-family:'Lucida Console';">Welcome to Sydney</h1><p>Visit the iconic <strong>Sydney Opera House</strong> and relax on the beaches.</p>`,
+            "Australia_Melbourne": `<h1 style="color:darkgreen; font-family:'Comic Sans MS';">Welcome to Melbourne</h1><p>Known for its vibrant <strong>art scene</strong> and coffee culture.</p>`
         };
 
-        // Pobieranie parametrów z URL
+        // Get parameters from URL
         const params = new URLSearchParams(window.location.search);
         const country = params.get('country');
         const city = params.get('city');
 
-        // Generowanie klucza
+        // Generate key and fetch content
         const key = `${country}_${city}`;
-        const content = data[key] || "<p>No data available for the selected country and city.</p>";
+        const content = data[key] || `<p>No data available for the selected country and city.</p>`;
 
-        // Wstawianie treści na stronę
+        // Display content
         document.getElementById('content').innerHTML = content;
     </script>
 </body>
