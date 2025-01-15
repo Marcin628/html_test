@@ -3,139 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Highlights</title>
+    <title>Dynamic Key Handling</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             line-height: 1.6;
-            background-color: #f8f9fa;
         }
         .content {
             border: 2px solid #ddd;
             padding: 20px;
             margin-top: 20px;
             border-radius: 10px;
-            background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin-bottom: 10px;
-        }
-        p, ul, ol {
-            margin-top: 10px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        ol {
-            padding-left: 20px;
-        }
-        blockquote {
-            font-style: italic;
-            color: #555;
-            border-left: 4px solid #ddd;
-            padding-left: 10px;
-            margin-top: 20px;
-        }
-        .highlight {
-            color: #007bff;
-            font-weight: bold;
-        }
-        .info-box {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f0f8ff;
-            border-left: 5px solid #007bff;
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
-    <h1>City Highlights</h1>
+    <h1>City Information</h1>
     <div id="content" class="content">
-        <p>Select a country and city to view its highlights.</p>
+        <p>Loading content...</p>
     </div>
 
     <script>
-        // Dynamic data for cities
+        // Pobranie parametru Key z URL
+        const params = new URLSearchParams(window.location.search);
+        const key = params.keys().next().value; // Odczytaj pierwszy parametr z URL
+
+        // Dane mapowane na Key
         const data = {
-            "USA_New York": `
-                <h1 style="color:blue;">Welcome to New York</h1>
-                <p style="font-style:italic;">New York City, known as <strong>The Big Apple</strong>, is a bustling metropolis full of life.</p>
-                <ul>
-                    <li>Home to the <span class="highlight">Statue of Liberty</span> and Ellis Island</li>
-                    <li>Explore the <u>skyscrapers</u> of Manhattan, including the Empire State Building</li>
-                    <li>Take a stroll through <strong>Central Park</strong> and enjoy its tranquility</li>
-                </ul>
-                <blockquote>"The city that never sleeps, where dreams come true."</blockquote>
-                <p>Don’t miss Broadway shows, the cultural diversity of Queens, and the stunning views from the Brooklyn Bridge.</p>
-            `,
-            "USA_Los Angeles": `
-                <h1 style="color:darkorange;">Welcome to Los Angeles</h1>
-                <p>Los Angeles is the <strong>entertainment capital</strong> of the world, offering:</p>
-                <ul>
-                    <li>The glamour of <u>Hollywood</u>, with its Walk of Fame</li>
-                    <li>Relaxing beaches like <span style="color:teal;">Santa Monica</span> and Venice Beach</li>
-                    <li>Amazing art at the <strong>Getty Center</strong></li>
-                </ul>
-                <blockquote>"LA is where the sun shines and stars are born."</blockquote>
-                <p>Enjoy the iconic views of the Hollywood sign and dine at some of the best international restaurants.</p>
-            `,
-            "Canada_Toronto": `
-                <h1 style="color:red;">Welcome to Toronto</h1>
-                <p><u>Canada’s largest city</u> is a hub of culture and innovation.</p>
-                <ol>
-                    <li>Experience the awe-inspiring <strong>CN Tower</strong>, one of the world’s tallest free-standing structures</li>
-                    <li>Visit <em>Ripley’s Aquarium</em>, featuring a moving walkway through a glass tunnel</li>
-                    <li>Explore the vibrant <u>Kensington Market</u> for unique shops and food</li>
-                </ol>
-                <div class="info-box">
-                    <strong>Insider Tip:</strong> Take a ferry to the Toronto Islands for a picturesque view of the city skyline.
-                </div>
-            `,
-            "France_Paris": `
-                <h1 style="color:pink;">Bienvenue à Paris</h1>
-                <p>The <strong>City of Light</strong> is renowned for its romance and beauty:</p>
-                <ul style="list-style-type:disc;">
-                    <li>Admire the sparkling <u>Eiffel Tower</u> at night</li>
-                    <li>Explore the art treasures at the <span style="color:navy;">Louvre Museum</span></li>
-                    <li>Relax in the gardens of <em>Luxembourg</em> or <strong>Champs-Élysées</strong></li>
-                </ul>
-                <p>Don't miss Parisian patisseries, where you can savor croissants, macarons, and éclairs.</p>
-            `,
-            "Japan_Tokyo": `
-                <h1 style="color:darkred;">ようこそ東京へ (Welcome to Tokyo)</h1>
-                <p style="font-size:14px;">Tokyo is a city where tradition meets the future.</p>
-                <ol style="list-style-type:decimal;">
-                    <li>See the stunning <u>Shibuya Crossing</u>, one of the busiest intersections in the world</li>
-                    <li>Visit the serene <strong>Sensō-ji Temple</strong> in Asakusa</li>
-                    <li>Shop in the high-tech streets of <span style="color:green;">Akihabara</span></li>
-                </ol>
-                <blockquote>"Tokyo is where ancient traditions blend seamlessly with cutting-edge technology."</blockquote>
-                <p>Don't leave without enjoying authentic sushi and visiting a karaoke bar!</p>
-            `,
-            "Italy_Rome": `
-                <h1 style="color:goldenrod;">Benvenuto a Roma</h1>
-                <p>Rome, the <strong>Eternal City</strong>, is steeped in history:</p>
-                <ul>
-                    <li>Step back in time at the <u>Colosseum</u> and Roman Forum</li>
-                    <li>Marvel at the artistry of the <span style="color:blue;">Vatican Museums</span> and Sistine Chapel</li>
-                    <li>Throw a coin into the <strong>Trevi Fountain</strong> to ensure your return</li>
-                </ul>
-                <p style="font-style:italic;">Rome is a feast for the senses, from its ancient ruins to its delicious gelato.</p>
-            `
+            "Australia | Sydney": `<h1>Welcome to Sydney</h1><p>Explore the iconic <strong>Sydney Opera House</strong> and relax at <u>Bondi Beach</u>.</p>`,
+            "Canada | Toronto": `<h1>Welcome to Toronto</h1><p>Visit the <strong>CN Tower</strong> and enjoy multicultural cuisine in this vibrant city.</p>`,
+            "USA | New York": `<h1>Welcome to New York</h1><p>Discover the bustling streets of <strong>Manhattan</strong>, visit the <u>Statue of Liberty</u>, and enjoy a Broadway show.</p>`,
+            "France | Paris": `<h1>Bienvenue à Paris</h1><p>Experience the romantic charm of the <strong>Eiffel Tower</strong> and the art at <u>Louvre Museum</u>.</p>`,
+            "Japan | Tokyo": `<h1>ようこそ東京へ (Welcome to Tokyo)</h1><p>Explore the bustling <strong>Shibuya Crossing</strong>, and enjoy authentic <u>sushi</u> in the heart of Japan.</p>`
         };
 
-        // Get parameters from URL
-        const params = new URLSearchParams(window.location.search);
-        const country = params.get('country');
-        const city = params.get('city');
+        // Sprawdzanie danych na podstawie Key
+        const content = data[key] || `<p>Data not available for the key: <strong>${key}</strong></p>`;
 
-        // Generate key and fetch content
-        const key = `${country}_${city}`;
-        const content = data[key] || `<p>No data available for the selected country and city.</p>`;
-
-        // Display content
+        // Wyświetlanie zawartości na stronie
         document.getElementById('content').innerHTML = content;
     </script>
 </body>
